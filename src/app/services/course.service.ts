@@ -8,7 +8,7 @@ import { Course } from '../models/course'; // Importez le modèle Course
 })
 export class CourseService {
 
-  private baseUrl = 'http://localhost:8089/api/course'; // Assurez-vous que le port correspond à votre serveur Spring Boot
+  private baseUrl = 'http://192.168.49.2:30001/api/course'; // Assurez-vous que le port correspond à votre serveur Spring Boot
 
   constructor(private http: HttpClient) { }
 
