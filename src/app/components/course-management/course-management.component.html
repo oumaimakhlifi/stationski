@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des Cours</title>
+  <style>
+    /* Animation de défilement horizontal pour l'arrière-plan */
+    @keyframes scroll {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 100% 0; /* Défilement de gauche à droite */
+      }
+    }
+
+    /* Appliquer l'animation à l'arrière-plan */
+    body {
+      animation: scroll 30s linear infinite; /* Défilement plus rapide */
+      background: url('/assets/stationski.png') repeat-x; /* Remplacez par votre image */
+      background-size: auto 100%; /* Ajuster la taille de l'image */
+      height: 100vh; /* Assurez-vous que le corps a une hauteur pour que l'effet soit visible */
+      margin: 0; /* Supprime les marges par défaut */
+    }
+
+    /* Style du conteneur principal */
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      position: relative; /* Position relative pour permettre un positionnement absolu à l'intérieur */
+      z-index: 1; /* S'assurer que le conteneur est au-dessus de l'arrière-plan */
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    /* Espacement entre les sections de formulaire */
+    form div {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    select, input[type="number"], button {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    /* Style de la liste des cours */
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px; /* Espacement entre le formulaire et la liste */
+    }
+
+    li {
+      padding: 15px;
+      margin-bottom: 10px; /* Espacement entre chaque cours */
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s, box-shadow 0.3s; /* Ajout de la transition */
+    }
+
+    /* Effet d'élévation lors du survol */
+    li:hover {
+      transform: translateY(-5px); /* Légère élévation */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre portée */
+    }
+
+    .course-info {
+      flex-grow: 1;
+    }
+
+    li button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-left: 10px;
+      transition: background-color 0.3s; /* Transition pour le bouton */
+    }
+
+    li button:hover {
+      background-color: #0056b3;
+    }
+
+    li button:last-child {
+      background-color: #dc3545;
+    }
+
+    li button:last-child:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gestion des Cours</h1>
+
+    <form (ngSubmit)="course.level ? saveUpdatedCourse() : addCourse()">
+      <input type="hidden" [(ngModel)]="course.level" name="level" />
+
+      <div>
+        <label for="typeCourse">Type de Cours:</label>
+        <select [(ngModel)]="course.typeCourse" name="typeCourse" required>
+          <option *ngFor="let type of ['COLLECTIVE_CHILDREN', 'COLLECTIVE_ADULT', 'INDIVIDUAL']" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="support">Support:</label>
+        <select [(ngModel)]="course.support" name="support" required>
+          <option *ngFor="let support of ['SKI', 'SNOWBOARD']" [value]="support">{{ support }}</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="price">Prix:</label>
+        <input type="number" [(ngModel)]="course.price" name="price" placeholder="Prix" required />
+      </div>
+      
+      <div>
+        <label for="timeSlot">Créneau horaire:</label>
+        <input type="number" [(ngModel)]="course.timeSlot" name="timeSlot" placeholder="Créneau horaire" required />
+      </div>
+
+      <button type="submit">Ajouter Cours</button>
+    </form>
+
+    <h2>Liste des Cours</h2>
+    <ul>
+      <li *ngFor="let course of courses">
+        <div class="course-info">
+          {{ course.level }} - {{ course.typeCourse }} - {{ course.support }} - {{ course.price }} - {{ course.timeSlot }}
+        </div>
+        <button (click)="updateCourse(course)">Modifier</button>
+        <button (click)="deleteCourse(course.level)">Supprimer</button>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
