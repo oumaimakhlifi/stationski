@@ -1,20 +1,27 @@
-FROM node:20
+# Utiliser un runtime Node.js officiel comme image de base
+FROM node:20 AS build
 
-RUN npm install -g @angular/cli
+# Définir le répertoire de travail à l'intérieur du conteneur
+WORKDIR /app
 
-WORKDIR /
-RUN mkdir angular-app
-WORKDIR /angular-app
+# Copiez package.json et package-lock.json dans le conteneur
+COPY package*.json ./
 
-ENV APP_NAME 'my-app'
-ENV ROUTING 'true'
-ENV STANDALONE 'false'
-ENV STRICT 'true'
-ENV STYLE 'scss'
+# Installer les dépendances de l'application
+RUN npm install
 
-CMD ng new $APP_NAME --routing=$ROUTING --standalone=$STANDALONE --strict=$STRICT --style=$STYLE \
-    && mv $APP_NAME/* . \
-    && rm -rf $APP_NAME \
-    && ng serve --host 0.0.0.0 --port 4200
+# Copiez le reste du code source de l'application dans le conteneur
+COPY . .
 
+# Créer l'application angular
+RUN node_modules/.bin/ng build --configuration production
+
+# Utiliser NGINX comme serveur de production
+FROM nginx:alpine
+COPY --from=build /app/dist/app/dist/my-angular-app /usr/share/nginx/html
+
+# Exposer le port 80
 EXPOSE 4200
+
+# Démarrer Nginx
+CMD ["nginx", "-g", "daemon off;"]
