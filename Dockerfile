@@ -32,4 +32,5 @@ COPY --from=build /app/dist/mon-projet-angular /app
 EXPOSE 4200
 
 # Commande pour démarrer le serveur de développement Angular
-CMD ["npx", "http-server", "-p", "4200"]
+CMD ["npx", "http-server", "-p", "4200", "--host", "0.0.0.0"]
+
