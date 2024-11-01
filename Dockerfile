@@ -18,7 +18,7 @@ RUN npm run build --prod
 FROM nginx:alpine
 
 # Copier les fichiers de construction dans le répertoire Nginx
-COPY --from=build /app/dist/nom-de-votre-application /usr/share/nginx/html
+COPY --from=build /app/dist/mon-projet-angular /usr/share/nginx/html
 
 # Exposer le port 4200
 EXPOSE 4200
