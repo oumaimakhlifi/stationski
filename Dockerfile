@@ -16,8 +16,8 @@ RUN npm install --omit=dev
 # Copier le reste des fichiers de l'application
 COPY . .
 
-# Construire l'application Angular
-RUN npm run build --configuration production
+# Construire l'application Angular pour la production
+RUN ng build --configuration production
 
 # Étape 2 : Servir l'application
 FROM node:20 AS serve
@@ -28,7 +28,7 @@ WORKDIR /app
 # Copier les fichiers construits vers le nouveau conteneur
 COPY --from=build /app/dist/votre-nom-d-app ./dist
 
-# Installer les dépendances nécessaires pour servir l'application
+# Installer le serveur pour servir l'application
 RUN npm install -g serve
 
 # Exposer le port 4200
