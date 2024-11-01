@@ -4,24 +4,26 @@ FROM node:20 AS build
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Copier les fichiers de configuration et les dépendances
+# Copier les fichiers de configuration de npm
 COPY package.json package-lock.json ./
-RUN npm install --production
+
+# Installer les dépendances de production
+RUN npm install --omit=dev
 
 # Copier le reste des fichiers de l'application
 COPY . .
 
 # Construire l'application Angular
-RUN npm run build --prod
+RUN npm run build --configuration production
 
-# Étape 2 : Configuration du serveur Nginx pour servir l'application
+# Étape 2 : Serveur de production
 FROM nginx:alpine
 
-# Copier les fichiers de construction dans le répertoire Nginx
-COPY --from=build /app/dist/mon-projet-angular /usr/share/nginx/html
+# Copier les fichiers construits vers le dossier de nginx
+COPY --from=build /app/dist/votre-nom-d-app /usr/share/nginx/html
 
-# Exposer le port 4200
-EXPOSE 4200
+# Exposer le port 80
+EXPOSE 80
 
-# Commande par défaut pour démarrer Nginx
+# Commande par défaut pour démarrer nginx
 CMD ["nginx", "-g", "daemon off;"]
