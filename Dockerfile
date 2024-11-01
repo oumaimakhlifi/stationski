@@ -18,10 +18,10 @@ RUN node_modules/.bin/ng build --configuration production
 
 # Utiliser NGINX comme serveur de production
 FROM nginx:alpine
-COPY --from=build /app/dist/app/dist/my-angular-app /usr/share/nginx/html
+COPY --from=build /app/dist/app/dist/mon-projet-angular /usr/share/nginx/html
 
-# Exposer le port 80
-EXPOSE 4200
+# Exposer le port 4200
+EXPOSE 80
 
 # Démarrer Nginx
 CMD ["nginx", "-g", "daemon off;"]
