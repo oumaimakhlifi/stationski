@@ -1,25 +1,19 @@
-FROM node:20
+FROM node:20-alpine as build
 
-# Installer Angular CLI globalement
-RUN npm install -g @angular/cli
-
-# Définir le répertoire de travail
 WORKDIR /app
 
-# Copier les fichiers de dépendance
 COPY package*.json ./
 
-# Installer les dépendances et supprimer les avertissements
-RUN npm install --legacy-peer-deps
+RUN npm install --force
 
-# Copier le reste de votre application
+RUN npm install -g @angular/cli@14 --force
+
 COPY . .
 
-# Construire l'application Angular
-RUN ng build --configuration production
+RUN ng build
 
-# Exposer le port 4200
-EXPOSE 4200
+FROM nginx:latest
 
-# Démarrer le serveur Angular
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
+COPY --from=build app/dist/mon-projet-angular /usr/share/nginx/html
+
+EXPOSE 80
