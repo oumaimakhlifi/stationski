@@ -16,4 +16,4 @@ FROM nginx:latest
 
 COPY --from=build app/dist/mon-projet-angular /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 4200
