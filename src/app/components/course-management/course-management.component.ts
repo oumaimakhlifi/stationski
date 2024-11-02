@@ -53,13 +53,19 @@ export class CourseManagementComponent implements OnInit {
     });
   }
 
-  deleteCourse(level: number): void {
+ deleteCourse(numCourse: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce cours ?')) { // Confirmation dialog
-      this.courseService.deleteCourse(level).subscribe(() => {
-        this.retrieveCourses();
-      });
+        this.courseService.deleteCourse(numCourse).subscribe(
+            () => {
+                this.retrieveCourses(); // Rafraîchir la liste après suppression
+            },
+            (error) => {
+                console.error('Erreur lors de la suppression du cours', error);
+                alert('Une erreur est survenue lors de la suppression du cours.');
+            }
+        );
     }
-  }
+}
 
   resetCourse(): void {
     this.course = { level: 1, typeCourse: TypeCourse.COLLECTIVE_CHILDREN, support: Support.SKI, price: 0, timeSlot: 0 };
