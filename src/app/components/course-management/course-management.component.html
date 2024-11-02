@@ -163,7 +163,7 @@
           {{ course.level }} - {{ course.typeCourse }} - {{ course.support }} - {{ course.price }} - {{ course.timeSlot }}
         </div>
         <button (click)="updateCourse(course)">Modifier</button>
-        <button (click)="deleteCourse(course.level)">Supprimer</button>
+        <button (click)="deleteCourse(course.numCourse!)">Supprimer</button>
       </li>
     </ul>
   </div>
