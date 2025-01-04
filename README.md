@@ -11,7 +11,6 @@ Ce dépôt contient le backend de notre application. Voici les principales carac
 - 🛠️ **Intégration dans une pipeline CI/CD** pour des déploiements automatisés et rapides.
 - ☁️ Déployé sur un **cluster Kubernetes** pour assurer scalabilité et résilience.
 - 📊 Monitoring intégré avec **Prometheus**, **Grafana**, et **ArgoCD**.
-- 🔄 **Sauvegarde et restauration** gérées via **Velero**.
 
 ---
 
