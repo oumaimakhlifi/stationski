@@ -1,27 +1,44 @@
-# MonProjetAngular
+# 📦 DevOps Backend Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+🎉 **Bienvenue dans notre projet DevOps !** Ce projet est conçu pour s'intégrer dans une **pipeline CI/CD complète** et se déploie automatiquement sur un **cluster Kubernetes**. 🚀
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 📝 Description
 
-## Code scaffolding
+Ce dépôt contient le backend de notre application. Voici les principales caractéristiques :
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- 🛠️ **Intégration dans une pipeline CI/CD** pour des déploiements automatisés et rapides.
+- ☁️ Déployé sur un **cluster Kubernetes** pour assurer scalabilité et résilience.
+- 📊 Monitoring intégré avec **Prometheus**, **Grafana**, et **ArgoCD**.
+- 🔄 **Sauvegarde et restauration** gérées via **Velero**.
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🚀 Fonctionnalités
 
-## Running unit tests
+- **Pipeline DevOps** : Automatisation des tests, de la construction et du déploiement.
+- **Conteneurisation** : Utilisation de **Docker** pour une portabilité optimale.
+- **Déploiement** : Pods orchestrés par **Kubernetes**, avec **Minikube** pour les tests locaux.
+- **ArgoCD** : Utilisé pour la gestion continue des applications.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## 🛠️ Prérequis
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Avant de commencer, assurez-vous d'avoir :
 
-## Further help
+- **Git** installé : [Télécharger Git](https://git-scm.com/)
+- **Docker** : [Installer Docker](https://www.docker.com/)
+- **kubectl** : [Installer kubectl](https://kubernetes.io/docs/tasks/tools/)
+- **Minikube** : [Installer Minikube](https://minikube.sigs.k8s.io/docs/start/)
+- Accès à un **cluster Kubernetes**.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+---
+
+## 📦 Installation et Déploiement
+
+1. **Cloner le dépôt** 🖥️ :
+   ```bash
+   git clone --branch oumaima https://github.com/oumaimakhlifi/stationski.git
+   cd stationski
